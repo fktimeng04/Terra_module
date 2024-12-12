@@ -1,3 +1,5 @@
+#ec2
+
 resource "aws_instance" "webserver" {
   ami           = var.amiid
   instance_type = var.machinetype
@@ -8,6 +10,9 @@ resource "aws_instance" "webserver" {
     Name = var.mytag
   }
 }
+
+#variables
+
 variable "sgname" {}
 
 variable "cidr" {}
@@ -19,6 +24,8 @@ variable "amiid" {}
 variable "machinetype" {}
 
 variable "keyname" {}
+
+#security
 
 resource "aws_security_group" "global-sg-2021" {
   name        = var.sgname

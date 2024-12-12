@@ -1,0 +1,50 @@
+#provider
+
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "3.64.2"
+    }
+  }
+}
+
+
+provider "aws" {
+  region = "us-west-2"
+}
+
+#variables
+
+variable "sgname" {
+  sensitive = true
+}
+
+variable "cidr" {}
+
+variable "mytag" {}
+
+variable "amiid" {}
+
+variable "machinetype" {}
+
+variable "keyname" {}
+
+#tfvars
+sgname      = "prod-sg-21"
+cidr        = ["0.0.0.0/0"]
+mytag       = "prod_env"
+amiid       = "ami-094125af156557ca2"
+machinetype = "t2.micro"
+keyname     = "devjenkins"
+
+#main
+module "instance_provisioning" {
+  source      = "../module"
+  sgname      = var.sgname
+  cidr        = var.cidr
+  mytag       = var.mytag
+  amiid       = var.amiid
+  machinetype = var.machinetype
+  keyname     = var.keyname
+}
